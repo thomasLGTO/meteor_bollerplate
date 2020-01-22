@@ -1,0 +1,1 @@
+console.log('SERVER : meteor est lancé')
