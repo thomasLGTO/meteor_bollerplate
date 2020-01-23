@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {Form, Button, Container} from 'semantic-ui-react'
 import {Accounts} from 'meteor/accounts-base'
+import {Link} from 'react-router-dom'
+import {withTracker} from 'meteor/react-meteor-data'
 
 
 function Signin(props){
@@ -8,29 +10,35 @@ function Signin(props){
     const [password,setPassword] =useState()
 
     const signin=()=>{
-        console.log('SIGNUP', email,password)
-        Accounts.createUser({
-            email,
-            password,
-        },(err)=>{
-            if(err){
-                alert(err.message)
-            }else{
-                console.log('Utilisateur crée')
-            }
-            
-        })
+        Meteor.loginWithPassword(email, password)
     }
+
+    const logout =()=>Meteor.logout()
     return(
     <Container>
         <h1>Connectez vous</h1>
-        <Form  onSubmit={signup}>
-            <Form.Input value={email} onChange={(e,{value})=>setEmail(value)} label="Email" required  type="email"  placeholder="ex: toto@gmail.com"name="" id=""/>
-            <Form.Input value={password} onChange={(e,{value})=>setPassword(value)} label="Mot de passe" required type="password" name="" id=""/>
-            <Button disabled={!email || !password} color='blue'>m'inscrire</Button>
-        </Form>
+        {!props.current_user ?
+            <Form  onSubmit={signin}>
+                <Form.Input value={email} onChange={(e,{value})=>setEmail(value)} label="Email" required  type="email"  placeholder="ex: toto@gmail.com"name="" id=""/>
+                <Form.Input value={password} onChange={(e,{value})=>setPassword(value)} label="Mot de passe" required type="password" name="" id=""/>
+                <Button disabled={!email || !password} color='blue'>me connecter</Button>
+                <Link to="/signup">
+                <Button size="mini">Créer un compte</Button>
+                </Link>
+            </Form>
+        :
+        <div>
+        <p>Vous etes déja connecté</p>
+        <Button onClick={logout} color="red">Se déconnecter</Button>
+        </div>
+    }
     </Container>
     )
 }
 
-export default Signin
+export default withTracker(()=>{
+    const current_user =Meteor.user()
+    return {
+        current_user
+    }
+})(Signin)
