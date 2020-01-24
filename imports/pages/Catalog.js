@@ -17,7 +17,7 @@ function Catalog(props){
     )
 }
 
-export default withTracker((match)=>{
+export default withTracker(({match})=>{
     const {user_id} = match.params
     const products_pub =Meteor.subscribe('products.by_user', user_id)
     const loading = !products_pub.ready()

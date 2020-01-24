@@ -6,6 +6,7 @@ import Products from'/imports/api/products/products'
 import Product from'/imports/components/Product'
 
 
+
 function MyProducts(props){
     return(
     <Container>
