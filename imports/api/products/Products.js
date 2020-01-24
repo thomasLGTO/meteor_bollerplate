@@ -1,7 +1,7 @@
 import SimpleSchema from 'simpl-schema'
 const Products = new Mongo.Collection('products');
 
-const ProductSchema = new SimpleSchema({
+const ProductsSchema = new SimpleSchema({
     name : {
         type :String
     },
@@ -34,3 +34,4 @@ const ProductSchema = new SimpleSchema({
 })
 
 Products.attachSchema(ProductsSchema)
+export default Products
