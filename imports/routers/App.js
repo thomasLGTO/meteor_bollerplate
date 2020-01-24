@@ -5,9 +5,11 @@ import {
     Switch,
     Route
 } from 'react-router-dom'
+import Navbar from '/imports/components/Navbar'
 function App(props){
     return(
         <BrowserRouter>
+            <Navbar/>
             <Switch>
                 
                 <Route path="/" component={MainLayout}/>
