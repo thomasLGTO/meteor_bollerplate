@@ -28,7 +28,7 @@ function Signin(props){
             </Form>
         :
         <div>
-        <p>Vous etes déja connecté</p>
+<p>Vous etes déja connecté avec l'adresse {props.current_user.emails[0].address}</p>
         <Button onClick={logout} color="red">Se déconnecter</Button>
         </div>
     }
