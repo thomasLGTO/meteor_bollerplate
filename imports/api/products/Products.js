@@ -29,7 +29,7 @@ const ProductSchema = new SimpleSchema({
     },
     created_at : {
         type : Date,
-        defaultValue : new Date ()
+        defaultValue : new Date()
     }
 })
 
